@@ -32,8 +32,8 @@ while len(uris) < total:
 #Creating the playlist 
 query2 = f"https://api.spotify.com/v1/users/{spotify_user_id}/playlists"
 request_body = json.dumps({
-          "name": "All saved songs",
-          "description": "All of the songs that I have Saved",
+          "name": "All my liked songs",
+          "description": "All of the songs that I have Liked",
           "public": False
 })
 response2 = requests.post(url = query2, data = request_body, headers={"Content-Type":"application/json", 
