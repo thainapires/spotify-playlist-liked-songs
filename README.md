@@ -1,10 +1,8 @@
 # 
-<h2 align="center">Last 10 Saved Tracks Spotify</h2>
+<h2 align="center">Playlist with Liked Tracks from Spotify</h2>
 
 <p align="center">
-  A little while ago, I searched if there was a tool available online that saved all of my saved songs in spotify into a playlist, but I couldn't find it. I decided to explore the
-  spotify API and I was able to save the last 10 songs of my spotify saved songs, I can get up to 50 of the last songs and save in a playlist. Now I'm trying to find a way to
-  save all of the songs. So, for now my code retrieves the last 10 saved tracks of my spotify and adds to a new playlist called "Last 10 songs saved".
+  A little while ago, I really wanted to save all of my liked spotify songs into one single playlist, but doing this by hand would be impossible. I decided to explore the spotify API and this repository contains my code, that retrieves all of the liked songs from a spotify account and adds to a new playlist called "All my liked songs". I'm still working on improving the code.
 </p>
 
 <p align="center">
