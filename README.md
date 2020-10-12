@@ -12,7 +12,7 @@
    <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/thainapires/last10-SavedTracks-Spotify">
 </p>
 
-# Requirements
+# Usage
 
 First install the following:
 
