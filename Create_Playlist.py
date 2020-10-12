@@ -22,32 +22,25 @@ for i,j in enumerate(json_response['items']):
 #Creating the playlist 
 
 query2 = f"https://api.spotify.com/v1/users/{spotify_user_id}/playlists"
-
 request_body = json.dumps({
           "name": "Last 10 songs saved",
           "description": "The last 10 songs that I've saved",
           "public": False
 })
-
 response2 = requests.post(url = query2, data = request_body, headers={"Content-Type":"application/json", 
                         "Authorization":f"Bearer {spotify_token}"})
-
 url = response2.json()['external_urls']['spotify']
-
 #print(response2.status_code)
 
 #Filling the playlist with the songs
 
 playlist_id = response2.json()['id']
-
 query3 = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
-
 request_body = json.dumps({
           "uris" : uris
         })
 response3 = requests.post(url = query3, data = request_body, headers={"Content-Type":"application/json", 
                         "Authorization":f"Bearer {spotify_token}"})
-
 #print(response3.status_code)
 
 print(f'Your playlist is ready at {url}')
