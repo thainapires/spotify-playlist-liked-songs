@@ -37,5 +37,3 @@ Now, you can run the code:
 ```
 python3 Create_Playlist.py
 ```
-
-*If you want to change the number of songs, you can change the limit up to 50 in the query
