@@ -37,6 +37,8 @@ spotify_user_id = "YOUR-USER-ID-HERE"
 python3 createPlaylist.py
 ```
 
+After that, you'll get a message with the URL for the playlist created.
+
 ## Português
 
 Um Script em Python que pega todas as suas músicas curtidas, e gera uma nova playlist na sua conta com todas essas músicas.
@@ -68,4 +70,4 @@ spotify_user_id = "SEU-USER-ID_AQUI"
 python3 createPlaylist.py
 ```
 
-You'll get a message with the URL for the playlist created.
+Depois disso, você irá receber uma mensagem com a playlist criada.
