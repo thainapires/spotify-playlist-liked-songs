@@ -1,16 +1,13 @@
-# 
-<h2 align="center">Playlist with Liked Tracks from Spotify</h2>
+# Playlist with Liked Songs from Spotify
 
-<p align="center">
-  Script that retrieves all liked songs from an user and adds then into a new playlist called "All of my liked songs". 
-</p>
+A Python Script that gets your liked songs, and generates a new playlist in your account with all of these songs.
 
-<p align="center">
+<p>
    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/thainapires/last10-SavedTracks-Spotify">
    <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/thainapires/last10-SavedTracks-Spotify">
 </p>
 
-# Usage
+## English
 
 First install the following:
 
@@ -33,3 +30,5 @@ Now, you can run the code:
 ```
 python3 Create_Playlist.py
 ```
+
+  Um Script em Python que pega todas as suas músicas curtidas, e gera uma nova playlist na sua conta com todas essas músicas.
