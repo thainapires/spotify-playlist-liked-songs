@@ -2,7 +2,7 @@
 <h2 align="center">Playlist with Liked Tracks from Spotify</h2>
 
 <p align="center">
-  A little while ago, I really wanted to save all of my liked spotify songs into one single playlist, but doing this by hand would be impossible. I decided to explore the spotify API and this repository contains my code, that retrieves all of the liked songs from a spotify account and adds to a new playlist called "All my liked songs". I'm still working on improving the code.
+  Script that retrieves all liked songs from an user and adds then into a new playlist called "All of my liked songs". 
 </p>
 
 <p align="center">
@@ -16,10 +16,6 @@ First install the following:
 
 ```
 pip3 install requests
-```
-
-```
-pip3 install json
 ```
 
 Than, create a file called secrets.py with the following code:
