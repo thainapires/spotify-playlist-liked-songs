@@ -1,28 +1,29 @@
-# 
-<h2 align="center">Playlist with Liked Tracks from Spotify</h2>
+# Playlist with Liked Songs from Spotify
 
-<p align="center">
-  A little while ago, I really wanted to save all of my liked spotify songs into one single playlist, but doing this by hand would be impossible. I decided to explore the spotify API and this repository contains my code, that retrieves all of the liked songs from a spotify account and adds to a new playlist called "All my liked songs". I'm still working on improving the code.
-</p>
+A Python Script that gets your liked songs, and generates a new playlist in your account with all of these songs.
 
-<p align="center">
+<p>
    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/thainapires/last10-SavedTracks-Spotify">
    <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/thainapires/last10-SavedTracks-Spotify">
 </p>
 
-# Usage
+## English
 
-First install the following:
+### Setup
+
+1. Install the following package:
 
 ```
 pip3 install requests
 ```
 
-```
-pip3 install json
-```
+2. Get your spotify user ID and Oath Token:
 
-Than, create a file called secrets.py with the following code:
+   - To get your user ID, you have to login to spotify and go to the [Account Overview](https://www.spotify.com/us/account/overview/).
+   - To get your Oath Token, visit this url: [click here](https://developer.spotify.com/console/post-playlists/). Click the Get Token button.
+
+
+3. Create a file called secrets.py with the following code (replacing YOUR-TOKEN-HERE and YOUR-USER-ID-HERE with your token and your user id):
 
 ```
 #Keys
@@ -30,10 +31,39 @@ spotify_token = "YOUR-TOKEN-HERE"
 spotify_user_id = "YOUR-USER-ID-HERE"
 ```
 
-You have to change the values of the token and user id according to yours.
-
-Now, you can run the code:
+4. Run the File
 
 ```
-python3 Create_Playlist.py
+python3 createPlaylist.py
+```
+
+## Português
+
+Um Script em Python que pega todas as suas músicas curtidas, e gera uma nova playlist na sua conta com todas essas músicas.
+
+### Setup
+
+1. Instale o seguinte pacote no seu ambiente de desenvolvimento:
+
+```
+pip3 install requests
+```
+
+2. Pegue seu user ID e seu Token Oath:
+   - To get your user ID, you have to login to spotify and go to the [Account Overview](https://www.spotify.com/us/account/overview/).
+   - To get your Oath Token, visit this url: [click here](https://developer.spotify.com/console/post-playlists/). Click the Get Token button.
+
+
+3. Crie um arquivo chamado secrets.py com o seguinte código (substituindo SEU-TOKEN-AQUI e SEU-USER-ID_AQUI com o seu token e seu user ID):
+
+```
+#Keys
+spotify_token = "SEU-TOKEN-AQUI"
+spotify_user_id = "SEU-USER-ID_AQUI"
+```
+
+4. Rode o arquivo
+
+```
+python3 createPlaylist.py
 ```
