@@ -2,73 +2,83 @@ from secrets import spotify_user_id, spotify_token
 import requests
 import json
 
-uris = [] 
-query = f'https://api.spotify.com/v1/me/tracks?offset=0&limit=50'
+class Playlist:
 
-#Requesting and getting response
-response = requests.get(query, 
+    uris = []
+    url = ''
+    playlist_id = ''
+    total = ''
+
+    def __init__(self):
+        pass
+
+    def get_total(self):
+        query = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=1'
+
+        response = requests.get(query, 
                headers={"Content-Type":"application/json", 
                         "Authorization":f"Bearer {spotify_token}"})
-json_response = response.json()
-#print(response.status_code)
+        
+        json_response = response.json()
+        total = json_response['total']
+        return total
 
-#Printing response
-for i,j in enumerate(json_response['items']):
-    uris.append(j['track']['uri'])
-    #print(f"{i+1}) \"{j['track']['name']}\"")
+    def get_all_songs(self):
+        
+        self.total = self.get_total()            
+        total_retrieved = 0
 
-total = json_response['total']
-while len(uris) < total:
-    query = f'https://api.spotify.com/v1/me/tracks?offset={len(uris)}&limit=50'
-    response = requests.get(query, 
-               headers={"Content-Type":"application/json", 
-                        "Authorization":f"Bearer {spotify_token}"})
-    json_response = response.json()
-    for i,j in enumerate(json_response['items']):
-        uris.append(j['track']['uri'])
-        #print(f"{i+1}) \"{j['track']['name']}\"")
+        while total_retrieved < self.total:
+            query = f'https://api.spotify.com/v1/me/tracks?offset={total_retrieved}&limit=50'
+            response = requests.get(query, 
+                    headers={"Content-Type":"application/json", 
+                                "Authorization":f"Bearer {spotify_token}"})
+            json_response = response.json()
 
+            urisAux = []
+            for i,j in enumerate(json_response['items']):
+                urisAux.append(j['track']['uri'])
+                total_retrieved += 1
 
-#Creating the playlist 
-query2 = f"https://api.spotify.com/v1/users/{spotify_user_id}/playlists"
-request_body = json.dumps({
-          "name": "All my liked songs",
-          "description": "All of the songs that I have Liked",
-          "public": False
-})
-response2 = requests.post(url = query2, data = request_body, headers={"Content-Type":"application/json", 
-                        "Authorization":f"Bearer {spotify_token}"})
-url = response2.json()['external_urls']['spotify']
-#print(response2.status_code)
+            self.uris.append(urisAux) 
 
-#Filling the playlist with the songs
-playlist_id = response2.json()['id']
-query3 = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
+    def create_playlist(self):
+        query = "https://api.spotify.com/v1/users/{}/playlists".format(spotify_user_id)
+        
+        request_body = json.dumps({
+                "name": "All my liked songs",
+                "description": "A Playlist with all of the songs that I Liked!",
+                "public": False
+        })
+        
+        response = requests.post(url = query, data = request_body, headers={"Content-Type":"application/json", 
+                                "Authorization": "Bearer {}".format(spotify_token)})
+        
+        json_response = response.json()
 
-finish = False
-x= 0
-y = 99
-totalAdded = 0 
+        self.url = json_response['external_urls']['spotify']
+        self.playlist_id = json_response['id']
 
-#Because it only adds 100 songs per request, we have to split the list
-while(totalAdded != total):
-    uris_aux = uris[x:y]
-    request_body = json.dumps({
-            "uris" : uris_aux
-            })
-    response3 = requests.post(url = query3, data = request_body, headers={"Content-Type":"application/json", 
-                            "Authorization":f"Bearer {spotify_token}"})
-    totalAdded = y
-    if(totalAdded != total):
-        x= y+1
-        y = x+99
-        if(y > total):
-            y = total
+    def populate_playlist(self):
+        
+        query = f"https://api.spotify.com/v1/playlists/{self.playlist_id}/tracks"
 
-def jprint(obj):
-    # create a formatted string of the Python JSON object
-    text = json.dumps(obj, sort_keys=True, indent=4)
-    print(text)
-
-jprint(response3.json())
-print(f'Your playlist is ready at {url}')
+        for uri in self.uris:
+        
+            request_body = json.dumps({
+                    "uris" : uri
+                    })
+            response = requests.post(url = query, data = request_body, headers={"Content-Type":"application/json", 
+                                    "Authorization":f"Bearer {spotify_token}"})
+        
+        print('Your playlist is ready at {}'.format(self.url))
+        
+if __name__ == '__main__':
+    #Creating the Playlist Object
+    playlist = Playlist()
+    #Getting all of the songs
+    playlist.get_all_songs()
+    #Creating the empty playlist in spotify
+    playlist.create_playlist()
+    #Populating the playlist
+    playlist.populate_playlist()
