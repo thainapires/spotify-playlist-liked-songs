@@ -67,3 +67,5 @@ spotify_user_id = "SEU-USER-ID_AQUI"
 ```
 python3 createPlaylist.py
 ```
+
+You'll get a message with the URL for the playlist created.
