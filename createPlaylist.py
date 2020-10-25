@@ -19,6 +19,7 @@ class Playlist:
         
         json_response = response.json()
         total = json_response['total']
+        print('You have {} liked songs.'.format(total))
         return total
 
     def get_all_songs(self):
@@ -35,9 +36,7 @@ class Playlist:
             urisAux = []
             for i,j in enumerate(json_response['items']):
                 self.uris.append(j['track']['uri'])
-                total_retrieved += 1
-
-        print('You have {} liked songs.'.format(len(self.uris)))             
+                total_retrieved += 1             
 
     def create_playlist(self):
         query = "https://api.spotify.com/v1/users/{}/playlists".format(spotify_user_id)
