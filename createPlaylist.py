@@ -43,7 +43,7 @@ class Playlist:
         query = "https://api.spotify.com/v1/users/{}/playlists".format(spotify_user_id)
         
         request_body = json.dumps({
-                "name": "All my liked songs",
+                "name": "Liked songs",
                 "description": "A Playlist with all of the songs that I Liked!",
                 "public": False
         })
