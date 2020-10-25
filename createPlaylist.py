@@ -33,7 +33,6 @@ class Playlist:
                                 "Authorization":f"Bearer {spotify_token}"})
             json_response = response.json()
 
-            urisAux = []
             for i,j in enumerate(json_response['items']):
                 self.uris.append(j['track']['uri'])
                 total_retrieved += 1             
