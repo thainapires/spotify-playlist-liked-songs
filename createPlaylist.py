@@ -4,13 +4,11 @@ import json
 
 class Playlist:
 
-    uris = []
-    url = ''
-    playlist_id = ''
-    total = ''
-
     def __init__(self):
-        pass
+        self.total = self.get_total()
+        self.uris = []
+        self.url = ''
+        self.playlist_id = ''
 
     def get_total(self):
         query = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=1'
@@ -25,7 +23,6 @@ class Playlist:
 
     def get_all_songs(self):
         
-        self.total = self.get_total()            
         total_retrieved = 0
 
         while total_retrieved < self.total:
@@ -37,10 +34,10 @@ class Playlist:
 
             urisAux = []
             for i,j in enumerate(json_response['items']):
-                urisAux.append(j['track']['uri'])
+                self.uris.append(j['track']['uri'])
                 total_retrieved += 1
 
-            self.uris.append(urisAux) 
+        print('You have {} liked songs.'.format(len(self.uris)))             
 
     def create_playlist(self):
         query = "https://api.spotify.com/v1/users/{}/playlists".format(spotify_user_id)
@@ -63,22 +60,21 @@ class Playlist:
         
         query = f"https://api.spotify.com/v1/playlists/{self.playlist_id}/tracks"
 
-        for uri in self.uris:
-        
+        for i in range (0, len(self.uris), 100):
             request_body = json.dumps({
-                    "uris" : uri
+                    "uris" : self.uris[i:i+100]
                     })
             response = requests.post(url = query, data = request_body, headers={"Content-Type":"application/json", 
                                     "Authorization":f"Bearer {spotify_token}"})
         
         print('Your playlist is ready at {}'.format(self.url))
-        
-if __name__ == '__main__':
-    #Creating the Playlist Object
-    playlist = Playlist()
-    #Getting all of the songs
-    playlist.get_all_songs()
-    #Creating the empty playlist in spotify
-    playlist.create_playlist()
-    #Populating the playlist
-    playlist.populate_playlist()
+
+
+#Creating the Playlist Object
+playlist = Playlist()
+#Getting all of the songs
+playlist.get_all_songs()
+#Creating the empty playlist in spotify
+playlist.create_playlist()
+#Populating the playlist
+playlist.populate_playlist()
