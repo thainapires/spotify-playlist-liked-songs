@@ -4,7 +4,6 @@ A Python Script that gets your liked songs, and generates a new playlist in your
 
 <p>
    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/thainapires/last10-SavedTracks-Spotify">
-   <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/thainapires/last10-SavedTracks-Spotify">
 </p>
 
 ## English
